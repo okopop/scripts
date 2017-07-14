@@ -1,3 +1,4 @@
+#! /bin/sh
 ### BEGIN INIT INFO
 # Provides: CHCD
 # Required-Start: $remote_fs $syslog
@@ -6,7 +7,6 @@
 # Default-Stop: 0 1 6
 # Short-Description: CHCD
 # Description: This file starts and stops CHCD server
-#
 ### END INIT INFO
 
 CHCD_DIR=x
