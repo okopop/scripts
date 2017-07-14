@@ -15,15 +15,16 @@ CHCD_CONF_DIR=x
 
 case "$1" in
  start)
+   /bin/pidof chaincoind >/dev/null && { echo "chaincoind already started"; exit 1; }
    su $CHCD_USER -c "$CHCD_DIR/chaincoind --conf=$CHCD_CONF_DIR/chaincoin.conf --daemon"
    echo "This takes a couple of seconds, please wait"
    ;;
  stop)
-   /bin/pidof chaincoind >/dev/null || echo "chaincoind not started"
+   /bin/pidof chaincoind >/dev/null || { echo "chaincoind not started"; exit 1; }
    su $CHCD_USER -c "$CHCD_DIR/chaincoind stop"
    ;;
  status)
-   /bin/pidof chaincoind >/dev/null || echo "chaincoind not started"
+   /bin/pidof chaincoind >/dev/null || { echo "chaincoind not started"; exit 1; }
    su $CHCD_USER -c "$CHCD_DIR/chaincoind getinfo"
    ;;
  restart)
