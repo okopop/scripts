@@ -17,7 +17,15 @@ case "$1" in
  start)
    /bin/pidof chaincoind >/dev/null && { echo "chaincoind already started"; exit 1; }
    su $CHCD_USER -c "$CHCD_DIR/chaincoind --conf=$CHCD_CONF_DIR/chaincoin.conf --daemon"
-   echo "This takes a couple of seconds, please wait"
+   echo "Wait for the service to start, it takes a couple of seconds"
+
+   # wait for service to start then show info
+   $0 status 2>/dev/null
+   while [ $? -ne 0 ]; do
+       echo -n "."
+       sleep 1
+       $0 status 2>/dev/null
+   done
    ;;
  stop)
    /bin/pidof chaincoind >/dev/null || { echo "chaincoind not started"; exit 1; }
@@ -29,12 +37,13 @@ case "$1" in
    ;;
  restart)
    $0 stop
-   echo "Sleeping 15 sec before starting again..."
-   sleep 15
+   echo "Sleeping 10 sec before starting again..."
+   sleep 10
    $0 start
    ;;
  *)
-   echo "Usage: CHCD {start|stop|status|restart}" >&2
+   echo "Usage: sudo $0 {start|stop|status|restart}" >&2
    exit 3
    ;;
 esac
+
