@@ -26,10 +26,12 @@ case "$1" in
        sleep 1
        $0 status 2>/dev/null
    done
+   su $CHCD_USER -c "$CHCD_DIR/chaincoind masternode start"
    ;;
  stop)
    /bin/pidof chaincoind >/dev/null || { echo "chaincoind not started"; exit 1; }
    su $CHCD_USER -c "$CHCD_DIR/chaincoind stop"
+   sleep 3
    ;;
  status)
    /bin/pidof chaincoind >/dev/null || { echo "chaincoind not started"; exit 1; }
@@ -46,4 +48,3 @@ case "$1" in
    exit 3
    ;;
 esac
-
