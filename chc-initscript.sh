@@ -19,13 +19,14 @@ case "$1" in
    su $CHCD_USER -c "$CHCD_DIR/chaincoind --conf=$CHCD_CONF_DIR/chaincoin.conf --daemon"
    echo "Wait for the service to start, it takes a couple of seconds"
 
-   # wait for service to start then show info
+   # wait for daemon to start then show info
    $0 status 2>/dev/null
    while [ $? -ne 0 ]; do
        echo -n "."
        sleep 1
        $0 status 2>/dev/null
    done
+   # start masternode
    su $CHCD_USER -c "$CHCD_DIR/chaincoind masternode start"
    ;;
  stop)
