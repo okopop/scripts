@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import requests
 try:
-    urls = ["http://www.x.se", "http://www.x.se"]
+    urls = ["http://www.x.se", "http://www.x.se", "http://www.x.se"]
     i = 0
     while i < len(urls):
         r = requests.head(urls[i])
