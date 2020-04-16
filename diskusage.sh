@@ -1,16 +1,16 @@
 #!/bin/bash
 set -eou pipefail
-readonly FORMAT="%-8s %-25s %-10s %s\n"
+readonly FORMAT="%-10s %s %5s  %s\n"
 readonly DIRS="/var \
                /opt/puppetlabs \
                /usr"
 
 [[ ! $EUID == 0 ]] && { echo "run as root"; exit 1; }
 
-printf "$FORMAT" SIZE DIRECTORY FINISHED
+#printf "$FORMAT" SIZE DIRECTORY TIME
 for dir in ${DIRS[@]}; do
   [[ ! -d $dir ]] && continue
   size=$(du -hsx $dir | awk '{print $1}')
-  finished=$(date "+%F %T")
-  printf "$FORMAT" $size $dir $finished
+  f_time=$(date "+%F %T")
+  printf "$FORMAT" $f_time $size $dir
 done
