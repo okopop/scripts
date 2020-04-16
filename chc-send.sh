@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eou pipefail
+set -euo pipefail
 CHC_COUNT=$1
 CHC_TO_SEND=$(( $CHC_COUNT - 1000 ))
 echo "$CHC_COUNT is current count"

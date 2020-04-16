@@ -1,6 +1,7 @@
 #!/bin/bash
 # mediawiki content xml dump. monthly rotation
-# tested on rhel
+# tested on rhel7
+set -euo pipefail
 
 readonly PID_CHECK="/usr/sbin/pidof"
 readonly PID_NAME="/usr/libexec/mysqld"
@@ -27,11 +28,12 @@ $PID_CHECK $PID_NAME >/dev/null || err "MariaDB process not started. Content bac
 [[ -f $DUMP_CMD ]] || err "Dump script is missing. Content backup aborted"
  
 # execute mediawiki xml dump (php dumpBackup.php --full > dump.xml)
-$PHP_CMD $DUMP_CMD $DUMP_PARAMETERS > $BACKUP_FOLDER$DUMP_FILENAME-$DUMP_DATE.xml
-/bin/gzip -f $BACKUP_FOLDER$DUMP_FILENAME-$DUMP_DATE.xml
+${PHP_CMD} ${DUMP_CMD} ${DUMP_PARAMETERS} > ${BACKUP_FOLDER}${DUMP_FILENAME}-${DUMP_DATE}.xml
+/bin/gzip -f ${BACKUP_FOLDER}${DUMP_FILENAME}-${DUMP_DATE}.xml
  
 if [ $? -eq "0" ]; then
-  /bin/logger -t "[INFO] Mediawiki backup" "Content xml dump was successful: $BACKUP_FOLDER$DUMP_FILENAME-$DUMP_DATE.xml"
+  /bin/logger -t "[INFO] Mediawiki backup" "Content xml dump was successful: \
+                 ${BACKUP_FOLDER}${DUMP_FILENAME}-${DUMP_DATE}.xml"
 else
   err "Execution of dump command failed"
 fi
