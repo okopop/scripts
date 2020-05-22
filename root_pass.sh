@@ -34,7 +34,7 @@ if [ $# -eq 0 ] || [ ! "$SERVERNAME" ]; then
 fi
 
 # main code
-HASHEDPASS=$(ssh root@$GPG_SRV sh genpassword.sh | ( read genpassword; openssl passwd -1 -salt xyz $genpassword))
+HASHEDPASS=$(ssh root@$GPG_SRV sh genpassword.sh | ( read -r genpassword; openssl passwd -1 -salt xyz "$genpassword"))
 echo "Generated password and create gpg file on $GPG_SRV then set root password locally on $SERVERNAME"
 if [ $VERBOSE -eq "1" ]; then
     echo "Set root password hash: $HASHEDPASS"
