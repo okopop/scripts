@@ -8,6 +8,7 @@ readonly DIRS="/var \
 [[ ! $EUID == 0 ]] && { echo "run as root"; exit 1; }
 
 #printf "$FORMAT" SIZE DIRECTORY TIME
+# shellcheck disable=SC2068
 for dir in ${DIRS[@]}; do
   [[ ! -d $dir ]] && continue
   size=$(du -hsx $dir | awk '{print $1}')
