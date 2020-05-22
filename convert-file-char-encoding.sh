@@ -1,6 +1,7 @@
 #!/bin/bash
 # check for wrong file encoding on files in folder. Convert and overwrite wrong ones
 # run script with cron
+# shellcheck disable=SC2086
 FILE_DIR=x
 WRONG_ENCODING="UTF-8"
 CORRECT_ENCODING="ASCII"
