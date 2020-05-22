@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 CHC_COUNT=$1
-CHC_TO_SEND=$(( $CHC_COUNT - 1000 ))
+CHC_TO_SEND=$(( CHC_COUNT - 1000 ))
 echo "$CHC_COUNT is current count"
 
 if [ $CHC_TO_SEND -ge "1" ]; then
