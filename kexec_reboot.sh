@@ -9,8 +9,8 @@ kexec_reboot() {
   new_kernel=${new_kernel#kernel-}
   
   if [[ $current_kernel != "$new_kernel" ]]; then 
-    kexec -l /boot/vmlinuz-${new_kernel} \
-      --initrd=/boot/initramfs-${new_kernel}.img \
+    kexec -l /boot/vmlinuz-"${new_kernel}" \
+      --initrd=/boot/initramfs-"${new_kernel}".img \
       --reuse-cmdline
     sync
     ( nohup sleep 2 && kexec -e & )
