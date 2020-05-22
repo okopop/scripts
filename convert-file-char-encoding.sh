@@ -9,7 +9,7 @@ CONVERT_CMD="/usr/bin/iconv"
 
 [ -f $CONVERT_CMD ] || { /bin/logger "[ERROR] Unable to convert file encoding because $CONVERT_CMD is missing"; exit 1; } 
 
-for file in $FILE_DIR/*; do
+for file in "$FILE_DIR"/*; do
    CHECK_ENCODING=$(file $FILE_DIR/$file | awk '{print $2}')
    if [ $CHECK_ENCODING == $WRONG_ENCODING ]; then
        echo "$FILE_DIR/$file is in wrong file type: $WRONG_ENCODING"
