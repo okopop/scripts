@@ -1,6 +1,7 @@
 #!/bin/bash
 # mediawiki content xml dump. monthly rotation
 # tested on rhel7
+# shellcheck disable=SC2086,SC2086
 set -euo pipefail
 
 readonly PID_CHECK="/usr/sbin/pidof"
