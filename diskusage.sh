@@ -11,7 +11,7 @@ readonly DIRS="/var \
 # shellcheck disable=SC2068
 for dir in ${DIRS[@]}; do
   [[ ! -d $dir ]] && continue
-  size=$(du -hsx $dir | awk '{print $1}')
+  size=$(du -hsx "$dir" | awk '{print $1}')
   f_time=$(date "+%F %T")
   printf "$FORMAT" $f_time $size $dir
 done
