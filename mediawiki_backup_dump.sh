@@ -16,7 +16,7 @@ readonly DUMP_PARAMETERS="--quiet --full"
 readonly DUMP_FILENAME="mediawiki-full-dump"
  
 err () {
-  /bin/logger -t "[ERROR] Mediawiki backup" $@
+  /bin/logger -t "[ERROR] Mediawiki backup" "$@"
   exit 1
 }
  
