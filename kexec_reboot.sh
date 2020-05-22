@@ -8,7 +8,7 @@ kexec_reboot() {
   new_kernel=$(rpm -qa kernel | tail -n 1)
   new_kernel=${new_kernel#kernel-}
   
-  if [[ $current_kernel != $new_kernel ]]; then 
+  if [[ $current_kernel != "$new_kernel" ]]; then 
     kexec -l /boot/vmlinuz-${new_kernel} \
       --initrd=/boot/initramfs-${new_kernel}.img \
       --reuse-cmdline
