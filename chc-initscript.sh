@@ -21,7 +21,9 @@ case "$1" in
 
    # wait for daemon to start then show info
    $0 status 2>/dev/null
+   # shellcheck disable=SC2181
    while [ $? -ne 0 ]; do
+       # shellcheck disable=SC2039
        echo -n "."
        sleep 1
        $0 status 2>/dev/null
